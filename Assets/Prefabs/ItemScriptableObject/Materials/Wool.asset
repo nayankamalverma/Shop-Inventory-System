@@ -19,5 +19,5 @@ MonoBehaviour:
   BuyingPrice: 100
   SellingPrice: 50
   Rarity: 2
-  Quantity: 2
+  Quantity: 1
   Weight: 2

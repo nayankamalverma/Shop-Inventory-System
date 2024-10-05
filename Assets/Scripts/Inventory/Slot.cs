@@ -1,5 +1,3 @@
-
-using System.Diagnostics.Tracing;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -8,7 +6,6 @@ public class Slot : MonoBehaviour
 {
     [SerializeField] private Image icon;
     [SerializeField] private TextMeshProUGUI quantityText;
-    [SerializeField] private Button removeButton;
     public ItemScriptableObject item {  get; private set; }
     public int quantity { get; private set; }
 
@@ -20,15 +17,21 @@ public class Slot : MonoBehaviour
 
     private void Start()
     {
+        RemoveItem();
+    }
+
+    public void RemoveItem()
+    {
+        item = null ;
+        quantity = 0;
         icon.enabled = false;
         quantityText.enabled = false;
-        removeButton.gameObject.SetActive(false);
     }
 
     public void  setItem(ItemScriptableObject item)
     {
         this.item = item;
-        quantity = (int)item.Quantity;
+        quantity = 1;
         UpdateInfo();
     }
 
@@ -36,12 +39,17 @@ public class Slot : MonoBehaviour
     {
         icon.enabled = true;
         quantityText.enabled= true;
-        removeButton.gameObject.SetActive(true);
         icon.sprite = item.Icon;
         quantityText.text = quantity.ToString();
     }
 
-    public void AddQuantity(int quantity) { this.quantity += quantity; }
-    public void SubQuantity(int quantity) { this.quantity -= quantity; }
+    private void UpdateQuantity()
+    {
+        quantityText.text = quantity.ToString();
+    }
+
+    public void AddQuantity(int quantity) { this.quantity += quantity; UpdateQuantity(); }
+
+    public void SubQuantity(int quantity) { this.quantity -= quantity; UpdateQuantity(); }
 
 }
