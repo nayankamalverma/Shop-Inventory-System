@@ -2,9 +2,9 @@ using UnityEngine;
 
 public class GameService : MonoBehaviour 
 {
-    [SerializeField] InventoryController inventoryController;
-    [SerializeField] ShopController shopController;
-    [SerializeField] CoinController coinController;
+    public InventoryController inventoryController;
+    public ShopController shopController;
+    public CoinController coinController;
 
     public static GameService Instance { get { return instance; }}
     private static GameService instance;
@@ -20,4 +20,5 @@ public class GameService : MonoBehaviour
             Destroy(gameObject);
         }
     }
+
 }

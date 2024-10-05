@@ -10,14 +10,14 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b8a30b80b73c3d24c9f25ae3ccc92dd2, type: 3}
-  m_Name: Silver Sword 3
+  m_Name: Silver Sword
   m_EditorClassIdentifier: 
-  Name: Knife
+  Name: Silver Sword
   ItemType: 1
-  Icon: {fileID: 21300000, guid: 778304de57b42204e8fa6693149c9af0, type: 3}
-  ItemDescription: Knife
-  BuyingPrice: 40
-  SellingPrice: 15
-  Rarity: 0
+  Icon: {fileID: 21300000, guid: 5b5b44c75f016d0498721612dd527e4f, type: 3}
+  ItemDescription: Silver sword
+  BuyingPrice: 200
+  SellingPrice: 100
+  Rarity: 3
   Quantity: 1
-  Weight: 1
+  Weight: 5
