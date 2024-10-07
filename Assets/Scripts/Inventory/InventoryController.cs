@@ -75,10 +75,13 @@ public class InventoryController : MonoBehaviour
                 slot.SetItem(item);
             }
             currentWeight += item.Weight;
+            string msg = "Item added to Inventory...";
+            StartCoroutine(infoPanel.ActivateMessagePanel(msg));
         }
         else
         {
-            Debug.Log("max weigh");
+            string msg = "Can`t buy this item.\n Over weight limit!!!";
+            StartCoroutine(infoPanel.ActivateMessagePanel(msg));
             return false;
         }
         UpdateWeight();
