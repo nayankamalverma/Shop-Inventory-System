@@ -9,13 +9,7 @@ public class Slot : MonoBehaviour
     public ItemScriptableObject item {  get; private set; }
     public int quantity { get; private set; }
 
-    public Slot()
-    {
-        item = null;
-        quantity = 0;
-    }
-
-    private void Start()
+    private void Awake()
     {
         RemoveItem();
     }
@@ -28,11 +22,25 @@ public class Slot : MonoBehaviour
         quantityText.enabled = false;
     }
 
-    public void  setItem(ItemScriptableObject item)
+    public void  SetItem(ItemScriptableObject item)
     {
-        this.item = item;
-        quantity = 1;
-        UpdateInfo();
+        if (item != null) 
+        {
+            this.item = item;
+            quantity = 1;
+            UpdateInfo();
+        }else Debug.Log("item null");
+    }
+
+    public void SetItemShop(ItemScriptableObject item)
+    {
+        if (item != null)
+        {
+            this.item = item ;
+            quantity = 1;
+            icon.enabled = true;
+            icon.sprite = item.Icon;
+        }
     }
 
     private void UpdateInfo()
@@ -51,5 +59,4 @@ public class Slot : MonoBehaviour
     public void AddQuantity(int quantity) { this.quantity += quantity; UpdateQuantity(); }
 
     public void SubQuantity(int quantity) { this.quantity -= quantity; UpdateQuantity(); }
-
 }

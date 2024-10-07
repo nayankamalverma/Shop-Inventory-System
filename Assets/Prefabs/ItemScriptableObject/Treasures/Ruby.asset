@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Ruby
   m_EditorClassIdentifier: 
   Name: Ruby
-  ItemType: 0
+  ItemType: 3
   Icon: {fileID: 21300000, guid: 97595bd235a373d4eb1e2189dbcf634c, type: 3}
   ItemDescription: Ruby dfhd
   BuyingPrice: 300

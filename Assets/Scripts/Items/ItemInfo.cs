@@ -19,7 +19,8 @@ public class ItemInfo : MonoBehaviour
     [SerializeField] private GameObject confirmationPanel;
     [SerializeField] private TextMeshProUGUI confirmationText;
     [SerializeField] private TextMeshProUGUI confirmationPriceText;
-    [SerializeField] private Button confirmButton;
+    [SerializeField] private Button sellConfirmButton;
+    [SerializeField] private Button buyConfirmButton;
     [SerializeField] private Button cancelButton;
 
     private ItemScriptableObject item;
@@ -28,7 +29,8 @@ public class ItemInfo : MonoBehaviour
     {
         sellButton.onClick.AddListener(ActivateConfirmationPanelSell);
         buyButton.onClick.AddListener(ActivateConfirmationPanelBuy);
-        confirmButton.onClick.AddListener(OnItemSell);
+        sellConfirmButton.onClick.AddListener(OnItemSell);
+        buyConfirmButton.onClick.AddListener(OnItemBuy);
         cancelButton.onClick.AddListener(DeactivateConfirmation);
     }
 
@@ -37,7 +39,6 @@ public class ItemInfo : MonoBehaviour
         if (item != null)
         {
             this.item = item;
-            Debug.Log("Item: " + item);
         }
         else
         {
@@ -46,6 +47,7 @@ public class ItemInfo : MonoBehaviour
 
         if (item != null)
         {
+            type.text = item.ItemType.ToString();
             name.text = item.Name;
             icon.sprite = item.Icon;
             description.text = item.ItemDescription;
@@ -57,21 +59,33 @@ public class ItemInfo : MonoBehaviour
     }
 
     private void ActivateConfirmationPanelSell()
-    {
+    {   
         confirmationPanel.SetActive(true);
+        sellConfirmButton.gameObject.SetActive(true);
         confirmationText.text = "Do you want to sell item?";
         confirmationPriceText.text = "Sell price : " + item.SellingPrice.ToString();
     }
     
     private void ActivateConfirmationPanelBuy()
     {
-        confirmationPanel.SetActive(true);
-        confirmationText.text = "Do you want to Buy item?";
-        confirmationPriceText.text = "Buy price : "+ item.BuyingPrice.ToString();
+        if (GameService.Instance.coinController.Coins >= item.BuyingPrice)
+        {
+            confirmationPanel.SetActive(true);
+            buyConfirmButton.gameObject.SetActive(true);
+            confirmationText.text = "Do you want to Buy item?";
+            confirmationPriceText.text = "Buy price : "+ item.BuyingPrice.ToString();
+        }
+        else
+        {
+            Debug.Log(" insufficient coins!!!");
+        }
+        
     }
 
     private void DeactivateConfirmation()
     {
+        buyConfirmButton.gameObject.SetActive (false);
+        sellConfirmButton.gameObject.SetActive(false);
         confirmationPanel.SetActive(false);
     }
 
@@ -80,6 +94,16 @@ public class ItemInfo : MonoBehaviour
         bool isItemRemoved = GameService.Instance.inventoryController.RemoveItem(item);
         if(isItemRemoved)GameService.Instance.coinController.AddCoins(item.SellingPrice);
         DeactivateConfirmation();
+    }
+
+    private void OnItemBuy() {
+        
+        bool isItemAdded = GameService.Instance.inventoryController.OnItemBuy(item);
+        if (isItemAdded)
+        {
+            GameService.Instance.coinController.DeductCoins(item.BuyingPrice);
+        }
+        DeactivateConfirmation() ;
     }
 
     public void SetSellActive()

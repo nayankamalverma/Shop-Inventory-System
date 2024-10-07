@@ -51,7 +51,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   icon: {fileID: 7707093031054710969}
   quantityText: {fileID: 6472748758581878634}
-  removeButton: {fileID: 0}
 --- !u!1 &4142158581410829561
 GameObject:
   m_ObjectHideFlags: 0
@@ -187,9 +186,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 139f066f7d00de24d96cdbdc7eac41d2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  icon: {fileID: 0}
-  quantityText: {fileID: 0}
-  removeButton: {fileID: 0}
+  icon: {fileID: 7707093031054710969}
+  quantityText: {fileID: 6472748758581878634}
 --- !u!1 &6244199451500279057
 GameObject:
   m_ObjectHideFlags: 0

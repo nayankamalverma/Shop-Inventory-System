@@ -38,7 +38,7 @@ public class InventoryController : MonoBehaviour
             if (buttonComponent != null)
             {
                 buttonComponent.onClick.RemoveAllListeners(); // Clear existing listeners
-                buttonComponent.onClick.AddListener(() => ShowDescriptionPanel(slot.item)); // Add new listener
+                buttonComponent.onClick.AddListener(()=> ShowDescriptionPanel(slot.item));// Add new listener
             }
         }
 
@@ -61,7 +61,7 @@ public class InventoryController : MonoBehaviour
         slots.Clear();
     }
 
-    public void AddItem(ItemScriptableObject item)
+    public bool AddItem(ItemScriptableObject item)
     {
         float totalWeight = item.Weight + currentWeight;
         if (totalWeight <= MaxWeight)
@@ -72,15 +72,17 @@ public class InventoryController : MonoBehaviour
             else
             {
                 slot = GetEmptySlot();
-                slot.setItem(item);
+                slot.SetItem(item);
             }
             currentWeight += item.Weight;
         }
         else
         {
             Debug.Log("max weigh");
+            return false;
         }
         UpdateWeight();
+        return true;
     }
 
     public bool RemoveItem(ItemScriptableObject item)
@@ -103,6 +105,11 @@ public class InventoryController : MonoBehaviour
             return false;
         }
         return true;
+    }
+
+    public bool OnItemBuy(ItemScriptableObject item)
+    {
+        return AddItem(item);
     }
 
     private Slot GetEmptySlot()

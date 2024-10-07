@@ -4,8 +4,7 @@ using UnityEngine;
 public class CoinController : MonoBehaviour
 {
     [SerializeField] TextMeshProUGUI coinsText;
-    private float Coins;
-
+    public float Coins {  get; private set; }
     private void Update()
     {
         UpdateCoins();
