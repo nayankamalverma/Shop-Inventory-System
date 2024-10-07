@@ -1,10 +1,11 @@
+using System.Collections;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class ItemInfo : MonoBehaviour
 {
-    
+    //item info
     [SerializeField] private Image icon;
     [SerializeField] private TextMeshProUGUI name;
     [SerializeField] private TextMeshProUGUI type;
@@ -13,12 +14,14 @@ public class ItemInfo : MonoBehaviour
     [SerializeField] private TextMeshProUGUI weight;
     [SerializeField] private TextMeshProUGUI buyPrice;
     [SerializeField] private TextMeshProUGUI sellPrice;
+
+    [SerializeField] private TextMeshProUGUI confirmationText;
+    [SerializeField] private TextMeshProUGUI messageText;
+    [SerializeField] private TextMeshProUGUI confirmationPriceText;
+    [SerializeField] private GameObject confirmationPanel;
+    [SerializeField] private GameObject messagePanel;
     [SerializeField] private Button sellButton;
     [SerializeField] private Button buyButton;
-
-    [SerializeField] private GameObject confirmationPanel;
-    [SerializeField] private TextMeshProUGUI confirmationText;
-    [SerializeField] private TextMeshProUGUI confirmationPriceText;
     [SerializeField] private Button sellConfirmButton;
     [SerializeField] private Button buyConfirmButton;
     [SerializeField] private Button cancelButton;
@@ -77,7 +80,8 @@ public class ItemInfo : MonoBehaviour
         }
         else
         {
-            Debug.Log(" insufficient coins!!!");
+            string msg = "insufficient Coins!!!!.. ";
+            StartCoroutine(ActivateMessagePanel(msg));
         }
         
     }
@@ -116,5 +120,13 @@ public class ItemInfo : MonoBehaviour
     {
         sellButton.gameObject.SetActive(false);
         buyButton.gameObject.SetActive(true);
+    }
+
+    public IEnumerator ActivateMessagePanel(string msg)
+    {
+        messagePanel.SetActive(true);
+        messageText.text = msg;
+        yield return new WaitForSeconds(1f);
+        messagePanel.SetActive(false);
     }
 }
