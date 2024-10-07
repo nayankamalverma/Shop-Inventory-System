@@ -37,9 +37,9 @@ public class ResourceGatherer : MonoBehaviour
 
         ItemScriptableObject item = SelectRandomItem(rarity);
 
-        GameService.Instance.inventoryController.AddItem(item);
+        bool itemAdded =  GameService.Instance.inventoryController.AddItem(item);
 
-        currentWeight += item.Weight;
+        if(itemAdded)currentWeight += item.Weight;
     }
 
     ItemRarity DetermineItemRarity()
